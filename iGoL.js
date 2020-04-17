@@ -245,6 +245,7 @@ define( ["clocks", "gameOfLife", "utils" ],
 
             document.getElementById("colorPalette").addEventListener("change", function(e){
                 userColor = e.target.value;
+                console.log("User color is " + userColor)
             });
 
 

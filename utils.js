@@ -127,11 +127,13 @@ define([],
            }
 
            document.getElementById("state0").addEventListener("change", function(e){
-                state0 = e.target.value;
+               state0 = e.target.value;
+               console.log("State0 color is " + state0)
             });
 
            document.getElementById("state1").addEventListener("change", function(e){
-                state1 = e.target.value;
+               state1 = e.target.value;
+               console.log("State1 color is " + state1)
             });
 
            return utils;
