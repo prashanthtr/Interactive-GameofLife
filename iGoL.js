@@ -13,6 +13,9 @@ define( ["clocks", "gameOfLife", "utils" ],
             var gridn = 100;
             var started = false
 
+            var userColor = "#004b49"
+            //var sunset_orange = "#f3b05a";
+
             var canvas = document.getElementById( 'svgCanvas' );
             var pW = canvas.clientWidth;
             var pH = canvas.clientHeight;
@@ -139,10 +142,6 @@ define( ["clocks", "gameOfLife", "utils" ],
 
             document.getElementById("clear").addEventListener("click",function(e){
                 gol.clear();
-            });
-
-            document.getElementById("reset").addEventListener("click",function(e){
-
                 for(var i= 0; i< workspace.length;i++){
                     var cf = workspace[i]
                     if( cf ){
@@ -151,6 +150,11 @@ define( ["clocks", "gameOfLife", "utils" ],
                     }
                 }
                 workspace = [];
+
+            });
+
+            document.getElementById("reset").addEventListener("click",function(e){
+
                 gol.reset();
             });
 
@@ -163,7 +167,7 @@ define( ["clocks", "gameOfLife", "utils" ],
                 //console.log(e.pageX + " " +  e.pageY)
                 if( moveState == 0 && started == true && withinSVG(e.pageX, e.pageY)){
                     moveState = 1;
-                    currentFig = utils.create_path(e.offsetX, e.offsetY, "#7c573d", canvas )
+                    currentFig = utils.create_path(e.offsetX, e.offsetY, userColor, canvas )
                     currentFig.pstring = "M " + e.offsetX + " " + e.offsetY;
                     currentFig.pstringArr = [];
                     currentFig.pstringArr.push([e.offsetX, e.offsetY]);
@@ -191,7 +195,7 @@ define( ["clocks", "gameOfLife", "utils" ],
                     //currentFig.pstring += " z";
                     //utils.update_path(e.offsetX, e.offsetY, currentFig) // could be a response call
                     currentFig.pstringArr.push([e.offsetX, e.offsetY]);
-                    workspace.push(currentFig.pstringArr)
+                    workspace.push(currentFig)
                     currentFig = null;
                     moveState = 0;
                     //console.log(workspace);

@@ -47,7 +47,7 @@ define([],
                    var path = document.createElementNS(svgns, 'path');
                    path.setAttributeNS(null,"d", pathstring);
                path.setAttributeNS(null, 'stroke', fill);
-               path.setAttributeNS(null, 'stroke-width', 5);
+               path.setAttributeNS(null, 'stroke-width', 8);
                    path.setAttributeNS(null, 'fill', "none");
                    canvas.appendChild(path);
                    return path;
@@ -116,10 +116,10 @@ define([],
                    cell.rect.setAttributeNS(null,"fill",args)
                }
                else if(cell.state == 0){
-                   cell.rect.setAttributeNS(null,"fill","#7ec850")
+                   cell.rect.setAttributeNS(null,"fill","#edc9af")
                }
                else{
-                   cell.rect.setAttributeNS(null,"fill","#006994")
+                   cell.rect.setAttributeNS(null,"fill","#87cefa")
                    cell.rect.setAttributeNS(null,"fill-opacity",1)
                }
            }

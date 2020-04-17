@@ -7,7 +7,7 @@
 define(["utils"],
        function(utils){
 
-           var population = 0.8;
+           var population = 0.85;
 
            return function golife ( n ){
 
@@ -68,7 +68,7 @@ define(["utils"],
                        //for each workspace line, change 16 cells
                        for( var figs =0; figs< workspace.length; figs++ ){
 
-                           var coords = workspace[figs];
+                           var coords = workspace[figs].pstringArr;
                            var xy1 = coords[0];
                            var xy2 = coords[1];
 
