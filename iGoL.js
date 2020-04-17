@@ -13,7 +13,7 @@ define( ["clocks", "gameOfLife", "utils" ],
             var gridn = 100;
             var started = false
 
-            var userColor = "#004b49"
+            var userColor = "#9ACD32"
             //var sunset_orange = "#f3b05a";
 
             var canvas = document.getElementById( 'svgCanvas' );
@@ -224,6 +224,11 @@ define( ["clocks", "gameOfLife", "utils" ],
                 started = true
                 drawLoop();
             });
+
+            document.getElementById("colorPalette").addEventListener("change", function(e){
+                userColor = e.target.value;
+            });
+
 
         }
       )

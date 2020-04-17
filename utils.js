@@ -7,6 +7,7 @@ define([],
            var canvas = document.getElementById( 'svgCanvas' );
 
            var utils = {}
+           var state0 = "#edc9af", state1 = "#87cefa";
 
            utils.create_rectangle = function (x,y,width,height,fill){
                // Grid is 100 by 100
@@ -116,13 +117,21 @@ define([],
                    cell.rect.setAttributeNS(null,"fill",args)
                }
                else if(cell.state == 0){
-                   cell.rect.setAttributeNS(null,"fill","#edc9af")
+                   cell.rect.setAttributeNS(null,"fill",state0)
                }
                else{
-                   cell.rect.setAttributeNS(null,"fill","#87cefa")
+                   cell.rect.setAttributeNS(null,"fill",state1)
                    cell.rect.setAttributeNS(null,"fill-opacity",1)
                }
            }
+
+           document.getElementById("state0").addEventListener("change", function(e){
+                state0 = e.target.value;
+            });
+
+           document.getElementById("state1").addEventListener("change", function(e){
+                state1 = e.target.value;
+            });
 
            return utils;
 
