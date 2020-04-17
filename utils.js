@@ -1,104 +1,131 @@
+define([],
+       function(){
+
+           //mapping from position to screen coordinates
+           //needs the svg context for height and width
+           var svgns = "http://www.w3.org/2000/svg";
+           var canvas = document.getElementById( 'svgCanvas' );
+
+           var utils = {}
+
+           utils.create_rectangle = function (x,y,width,height,fill){
+               // Grid is 100 by 100
+
+               var rect = document.createElementNS(svgns, 'rect');
+               rect.setAttributeNS(null, 'x', x);
+               rect.setAttributeNS(null, 'y', y);
+               rect.setAttributeNS(null, 'height', height);
+               rect.setAttributeNS(null, 'width', width);
+               rect.setAttributeNS(null, 'fill', fill);
+               rect.state = 0;
+               canvas.appendChild(rect);
+               return rect;
+           }
+
+           utils.create_rect_path_fn = function (scale_x, scale_y, canvas){
+
+               return function(x,y,width , height, fill){
+                   // Grid is 100 by 100
+
+                   var xpos = x*scale_x
+                   var ypos = y*scale_y;
+                   //rectangle border
+                   var pathstring = "M" + xpos + " " + ypos + " L" + (xpos+width) + " " + ypos + " L" + (xpos+width) + " " + (ypos+height) + " L" + xpos + " " + (ypos+height) + " L" + xpos + " " + ypos ;
+                   var path = document.createElementNS(svgns, 'path');
+                   path.setAttributeNS(null,"d", pathstring);
+                   path.setAttributeNS(null, 'stroke', fill);
+                   path.setAttributeNS(null, 'fill', "none");
+                   canvas.appendChild(path);
+                   return path;
+               }
+           }
+
+           utils.create_path = function(x,y, fill, canvas){
+                   // Grid is 100 by 100
+
+                   var pathstring = "M" + x + " " + y;
+                   var path = document.createElementNS(svgns, 'path');
+                   path.setAttributeNS(null,"d", pathstring);
+               path.setAttributeNS(null, 'stroke', fill);
+               path.setAttributeNS(null, 'stroke-width', 5);
+                   path.setAttributeNS(null, 'fill', "none");
+                   canvas.appendChild(path);
+                   return path;
+               }
+
+           utils.update_path = function (x, y, path){
+
+               path.pstring = path.pstring + "L" + x + " " + y;
+               path.setAttributeNS(null,"d", path.pstring);
+           }
+
+           utils.setNewpath = function ( path, xpos, ypos, width, height ){
+
+               var pathstring = "M" + xpos + " " + ypos + " L" + (xpos+width) + " " + ypos + " L" + (xpos+width) + " " + (ypos+height) + " L" + xpos + " " + (ypos+height) + " L" + xpos + " " + ypos ;
+               path.setAttributeNS(null,"d", pathstring);
 
 
-var svgns = "http://www.w3.org/2000/svg";
-var canvas = document.getElementById( 'svgCanvas' );
 
-//mapping from position to screen coordinates
-//needs the svg context for height and width
+           }
 
-export function create_rectangle(x,y,width,height,fill){
-        // Grid is 100 by 100
+           //checks if cell within boundary
+           utils.within_boundary = function(  xind, yind, n ){
 
-        var rect = document.createElementNS(svgns, 'rect');
-        rect.setAttributeNS(null, 'x', x);
-        rect.setAttributeNS(null, 'y', y);
-        rect.setAttributeNS(null, 'height', height);
-        rect.setAttributeNS(null, 'width', width);
-        rect.setAttributeNS(null, 'fill', fill);
-        rect.state = 0;
-        canvas.appendChild(rect);
-        return rect;
-}
+               var min = n/2-2;
+               var max = n/2+2;
 
-export function create_path_fn(scale_x, scale_y, canvas){
+               if( xind > min  && xind < max &&  yind > min && yind < max  ){
+                   return 1;
+               }
+               else{
+                   return 0;
+               }
+           }
 
-    return function(x,y,width , height, fill){
-            // Grid is 100 by 100
+           utils.on_boundary = function( x, y , boundary ){
 
-        var xpos = x*scale_x
-        var ypos = y*scale_y;
-        //rectangle border
-        var pathstring = "M" + xpos + " " + ypos + " L" + (xpos+width) + " " + ypos + " L" + (xpos+width) + " " + (ypos+height) + " L" + xpos + " " + (ypos+height) + " L" + xpos + " " + ypos ;
-        var path = document.createElementNS(svgns, 'path');
-        path.setAttributeNS(null,"d", pathstring);
-        path.setAttributeNS(null, 'stroke', fill);
-        path.setAttributeNS(null, 'fill', "none");
-        canvas.appendChild(path);
-        return path;
-    }
-}
+               var on_boundary = 0;
+               for(var i = 0; i <boundary.length; i++){
+                   var bx = boundary[i].xind
+                   var by = boundary[i].yind
 
-export function setNewpath ( path, xpos, ypos, width, height ){
-
-    var pathstring = "M" + xpos + " " + ypos + " L" + (xpos+width) + " " + ypos + " L" + (xpos+width) + " " + (ypos+height) + " L" + xpos + " " + (ypos+height) + " L" + xpos + " " + ypos ;
-    path.setAttributeNS(null,"d", pathstring);
+                   if( Math.abs( x - bx ) == 0 && Math.abs( y - by ) == 0 ){
+                       on_boundary = 1;
+                   }
+               }
+               return on_boundary;
+           }
 
 
+           utils.find_boundary_el = function(x,y, boundary){
 
-}
-
-//checks if cell within boundary
-export function within_boundary(  xind, yind, n ){
-
-    var min = n/2-2;
-    var max = n/2+2;
-
-    if( xind > min  && xind < max &&  yind > min && yind < max  ){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-
-export function on_boundary( x, y , boundary ){
-
-    var on_boundary = 0;
-    for(var i = 0; i <boundary.length; i++){
-        var bx = boundary[i].xind
-        var by = boundary[i].yind
-
-        if( Math.abs( x - bx ) == 0 && Math.abs( y - by ) == 0 ){
-            on_boundary = 1;
-        }
-    }
-    return on_boundary;
-}
+               var pos = -1;
+               for(var i = 0; i <boundary.length; i++){
+                   if( x == boundary[i].xind && y == boundary[i].yind){
+                       pos = i;
+                       break;
+                   }
+               }
+               return pos;
+           }
 
 
-export function find_boundary_el(x,y, boundary){
+           utils.setColor = function( cell, args ){
 
-    var pos = -1;
-    for(var i = 0; i <boundary.length; i++){
-        if( x == boundary[i].xind && y == boundary[i].yind){
-            pos = i;
-            break;
-        }
-    }
-    return pos;
-}
+               if( args!= null){
+                   cell.rect.setAttributeNS(null,"fill",args)
+               }
+               else if(cell.state == 0){
+                   cell.rect.setAttributeNS(null,"fill","#ffffff")
+               }
+               else{
+                   cell.rect.setAttributeNS(null,"fill","#8a0303")
+                   cell.rect.setAttributeNS(null,"fill-opacity",0.5)
+               }
+           }
+
+           return utils;
 
 
-export function setColor( cell, args ){
-
-    if( args!= null){
-        cell.rect.setAttributeNS(null,"fill",args)
-    }
-    else if(cell.state == 0){
-        cell.rect.setAttributeNS(null,"fill","#ffffff")
-    }
-    else{
-        cell.rect.setAttributeNS(null,"fill","#00a7be")
-        cell.rect.setAttributeNS(null,"fill-opacity",0.5)
-    }
-}
+       }
+      )

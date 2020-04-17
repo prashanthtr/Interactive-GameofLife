@@ -4,8 +4,8 @@
 <html>
     <head>
 
-      <link rel="stylesheet" type="text/css" href="css/appstyle.css">
-      <script type="module" src="appscripts/iGoL.js"></script>
+      <link rel="stylesheet" type="text/css" href="appstyle.css">
+      <script data-main="iGoL.js" src="jslibs/require.js"></script>
 
       <title> Boundaries - A game of life Tribute </title>
       <style type="text/css">
@@ -13,7 +13,6 @@
         ol { font-size: 11pt; }
         p { font-size: 11pt; }
         aside {font-size: 12pt;}
-        nav {overflow:scroll;}
 
       </style>
 
@@ -21,8 +20,9 @@
 
     <body bg-color="#000000">
 
-      <header> Draw imaginary boundary lines between living and non-living cells
-      and observe changes to the game world.  </header>
+      <header> Draw imaginary boundary lines in the overcrowded game world.
+        Cells in contact with boundary stay alive. Observe changes to the game
+        world. </header>
 
       <div id='main'>
 
@@ -42,7 +42,7 @@
 
         <aside>
 
-          <input type="button" id="reset" value="Remove-lines">  </input>
+          <input type="button" id="reset" value="Reset">  </input> <br>
           <input type="button" id="clear" value="Clear Screen">  </input> <br>
 
           <!-- <input type="button" id="restart" value="New Ca state">  </input> -->

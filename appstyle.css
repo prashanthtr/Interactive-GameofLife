@@ -1,0 +1,151 @@
+html, body {  /* Select and size the outermost elements so other elements can be set in % */
+	height:100%;
+	width:100%;
+}
+
+body {
+
+  font: 15px arial, sans-serif;
+  background-color: #d9d9d9;
+}
+
+  #main {  /* select element with id="main" */
+   min-height: 84%;
+   max-height: 100%;
+   margin: 0px;
+   padding: 0px;
+   display:  flex;
+   flex-flow: row;
+   border-radius: 0pt;
+   -webkit-overflow-scrolling: touch;
+  }
+
+  #main > article { /* select articles (if they are inside the element with id="main") */
+
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+    box-shadow: 5px 5px 5px grey;
+    border-radius: 15px;
+    flex: 3 2 60%;
+    order: 2;
+  }
+
+  #chatborder {
+    border-style: solid;
+    background-color: #f6f9f6;
+    border-width: 3px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 15px;
+    border-radius: 15px;
+    min-height: 65%;
+    max-height: 65%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #chatarea {
+    width: 100%;
+    max-height: 80%;
+    font: 14px arial, sans-serif;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #chatbox {
+    font: 17px arial, sans-serif;
+    height: 5%;
+    width: 100%;
+
+  }
+
+  .pclass {
+    font: 12px arial, calibri;
+    background-color: #add8e6;
+    box-shadow: 2px 2px 2px grey;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    max-height: 100px;
+    width: 100%;
+  }
+
+
+  #main > nav {
+   margin: 0px;
+   padding: 0px;
+   border: 0px solid #8888bb;
+   border-radius: 0pt;
+   background: #ffffff;
+   flex: 1 6 20%;
+   order: 1;
+  }
+
+  #main > aside {
+   margin: 0px;
+   padding: 0px;
+   border: 0px solid #8888bb;
+   border-radius: 0pt;
+   color: #ffffff;
+   background: #ffffff;
+           flex: 1 6 20%;
+           order: 3;
+
+   }
+
+#player {
+    width: 200px;
+   }
+
+  header, footer {  /* select all header and footer elements */
+   display: block;
+   margin: 0px;
+   padding: 0px;
+   min-height:8%;
+   border: 0px solid #eebb55;
+   border-radius: 0pt;
+   background: #ffffff;
+   text-align: center;
+   }
+
+  footer {    /* override these attributes just for the footer elements */
+   font-size: 10pt;
+   text-align: left;
+   }
+
+
+
+  /* Changes layout under these conditions : Too narrow to support three columns */
+  /* "at-rules" using the '@' sign is an "advanced" feature */
+  @media all and (max-width: 840px) {
+
+   #main, #page {
+    flex-flow: column;
+    flex-direction: column;
+   }
+
+   #main > article, #main > nav, #main > aside {
+    /* Return them to document order */
+            order: 0;
+   }
+
+   #main > nav, #main > aside, header, footer {
+    min-height: 50px;
+    max-height: 50px;
+   }
+
+   #main > article {
+     min-height: 60%;
+     max-height: 65%;
+   }
+
+};

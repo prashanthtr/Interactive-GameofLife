@@ -16,28 +16,35 @@
 //customized clock for timing control
 // how are the clocks synchronized
 
-export function js_clock ( latency , cycle ){
+define([],
+       function(){
 
-    var then = Date.now();
-    var interval = cycle; //in milliseconds
-    var lookahead = latency; //as low 1 frame (~50ms in my computer ! :( ))
+           return function ( latency , cycle ){
 
-    return function(now, cb){
+               var then = Date.now();
+               var interval = cycle; //in milliseconds
+               var lookahead = latency; //as low 1 frame (~50ms in my computer ! :( ))
 
-        var delta = now - then;
+               return function(now, cb){
 
-        if( delta > interval ){
-            then = now - (delta % interval); //look back
-            //console.log("Exceeded")
-            return function(){}
-        }
-        else if( delta > interval - lookahead){
-            then = then + interval
-            return cb;
-        }
-        else{
-            return function(){}
-        }
-        //return 0;
-    };
-}
+                   var delta = now - then;
+
+                   if( delta > interval ){
+                       then = now - (delta % interval); //look back
+                       //console.log("Exceeded")
+                       return function(){}
+                   }
+                   else if( delta > interval - lookahead){
+                       then = then + interval
+                       return cb;
+                   }
+                   else{
+                       return function(){}
+                   }
+                   //return 0;
+               };
+           }
+       }
+      )
+
+//export
