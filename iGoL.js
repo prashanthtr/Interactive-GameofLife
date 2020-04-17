@@ -1,4 +1,6 @@
 
+// the ends of the affect adjacent 9 cells in the region.
+
 // Interactive game of life simultation to check the effect of arbitrary
 // boundaries of simulation environment
 
@@ -8,7 +10,7 @@ define( ["clocks", "gameOfLife", "utils" ],
             var n = 30;
             var side = n+5;
 
-            var gridn = 40;
+            var gridn = 200;
             var started = false
 
             var canvas = document.getElementById( 'svgCanvas' );
@@ -72,8 +74,8 @@ define( ["clocks", "gameOfLife", "utils" ],
             var rafId = null;
 
             // //display after every action
-            var display = js_clock(50, 1000);
-            var sense = js_clock(50, 500);
+            var display = js_clock(50, 300);
+            var sense = js_clock(20, 150);
             var t = 0;
 
             // //console.log(cells)
@@ -86,7 +88,7 @@ define( ["clocks", "gameOfLife", "utils" ],
                 sense(now, function(){
 
                     if( workspace.length > 0){
-                        gol.sense(workspace);
+                        gol.sense(gridn, workspace);
                     }
                 })();
 
@@ -156,7 +158,7 @@ define( ["clocks", "gameOfLife", "utils" ],
                 //console.log(e.pageX + " " +  e.pageY)
                 if( moveState == 0 && started == true && withinSVG(e.pageX, e.pageY)){
                     moveState = 1;
-                    currentFig = utils.create_path(e.offsetX, e.offsetY, "blue", canvas )
+                    currentFig = utils.create_path(e.offsetX, e.offsetY, "#7c573d", canvas )
                     currentFig.pstring = "M " + e.offsetX + " " + e.offsetY;
                     currentFig.pstringArr = [];
                     currentFig.pstringArr.push([e.offsetX, e.offsetY]);
@@ -184,7 +186,7 @@ define( ["clocks", "gameOfLife", "utils" ],
                     //currentFig.pstring += " z";
                     //utils.update_path(e.offsetX, e.offsetY, currentFig) // could be a response call
                     currentFig.pstringArr.push([e.offsetX, e.offsetY]);
-                    workspace.push(currentFig)
+                    workspace.push(currentFig.pstringArr)
                     currentFig = null;
                     moveState = 0;
                     //console.log(workspace);

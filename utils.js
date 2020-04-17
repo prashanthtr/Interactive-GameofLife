@@ -116,10 +116,10 @@ define([],
                    cell.rect.setAttributeNS(null,"fill",args)
                }
                else if(cell.state == 0){
-                   cell.rect.setAttributeNS(null,"fill","#ffffff")
+                   cell.rect.setAttributeNS(null,"fill","#7ec850")
                }
                else{
-                   cell.rect.setAttributeNS(null,"fill","#8a0303")
+                   cell.rect.setAttributeNS(null,"fill","#006994")
                    cell.rect.setAttributeNS(null,"fill-opacity",0.5)
                }
            }
