@@ -10,7 +10,7 @@ body {
 }
 
   #main {  /* select element with id="main" */
-   min-height: 84%;
+   min-height: 88%;
    max-height: 100%;
    margin: 0px;
    padding: 0px;
@@ -25,13 +25,13 @@ body {
     background-color: #ffffff;
     border-style: solid;
     border-width: 1px;
-    padding-top: 20px;
-    padding-bottom: 25px;
+    padding-top: 15px;
     padding-right: 25px;
     padding-left: 25px;
     box-shadow: 5px 5px 5px grey;
     border-radius: 15px;
-    flex: 3 2 60%;
+    flex: 3 1 40%;
+    align-items: stretch;
     order: 2;
   }
 
@@ -48,15 +48,15 @@ body {
     padding-right: 20px;
     padding-left: 15px;
     border-radius: 15px;
-    min-height: 65%;
-    max-height: 65%;
+    min-height: 25%;
+    max-height: 75%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
 
   #chatarea {
     width: 100%;
-    max-height: 80%;
+    max-height: 100%;
     font: 14px arial, sans-serif;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;

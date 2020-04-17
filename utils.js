@@ -120,7 +120,7 @@ define([],
                }
                else{
                    cell.rect.setAttributeNS(null,"fill","#006994")
-                   cell.rect.setAttributeNS(null,"fill-opacity",0.5)
+                   cell.rect.setAttributeNS(null,"fill-opacity",1)
                }
            }
 

@@ -10,13 +10,14 @@ define( ["clocks", "gameOfLife", "utils" ],
             var n = 30;
             var side = n+5;
 
-            var gridn = 200;
+            var gridn = 100;
             var started = false
 
             var canvas = document.getElementById( 'svgCanvas' );
             var pW = canvas.clientWidth;
-            var pH = canvas.clientWidth
+            var pH = canvas.clientHeight;
 
+            console.log(pW + " " + pH)
 
             //canvas.clientHeight;
 
@@ -26,6 +27,8 @@ define( ["clocks", "gameOfLife", "utils" ],
             var svgX2 = svgXY.right
             var svgY2 = svgXY.bottom
 
+            console.log(svgXY.width)
+
             //console.log(svgX + ' ' + svgY + ' ' + svgX2 + ' ' + svgY2)
 
             // max 5 steps for now.
@@ -34,9 +37,9 @@ define( ["clocks", "gameOfLife", "utils" ],
             var pWidth = pW- pW%gridn
             var pHeight = pH - pH%gridn
 
-            pWidth = pWidth>pHeight?pHeight:pWidth; //smaller of the two
+            //pWidth = pWidth>pHeight?pHeight:pWidth; //smaller of the two
             //pWidth = pHeight
-            pHeight = pWidth
+            //pHeight = pWidth
 
 
             var workspace = [];
@@ -46,10 +49,12 @@ define( ["clocks", "gameOfLife", "utils" ],
             var t = 0; //as time
 
             console.log(pWidth + "  " + pHeight);
-
             // 40 * 40 grid
             var scale_w = Math.floor(pWidth/gridn);
             var scale_h = Math.floor(pHeight/gridn);
+
+            var newN = pWidth/scale_w;
+            console.log(newN)
 
             var side_w = scale_w;
             var side_h = scale_h;
@@ -67,7 +72,7 @@ define( ["clocks", "gameOfLife", "utils" ],
 
             var imageCoords = [];
 
-            var gol = golife( gridn )(scale_w, scale_h, side_w, side_h);
+            var gol = golife( newN )(scale_w, scale_h, side_w, side_h);
 
             var ca= [];
 
@@ -88,7 +93,7 @@ define( ["clocks", "gameOfLife", "utils" ],
                 sense(now, function(){
 
                     if( workspace.length > 0){
-                        gol.sense(gridn, workspace);
+                        gol.sense(newN, workspace);
                     }
                 })();
 
