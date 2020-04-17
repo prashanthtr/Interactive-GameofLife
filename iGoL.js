@@ -204,6 +204,18 @@ define( ["clocks", "gameOfLife", "utils" ],
                 }
             }
 
+            document.getElementById("stop").addEventListener("click",function(e){
+
+                cancelAnimationFrame(rafId);
+		            rafId = null;
+                started = false
+            });
+
+            document.getElementById("start").addEventListener("click",function(e){
+                started = true
+                drawLoop();
+            });
+
         }
       )
 
