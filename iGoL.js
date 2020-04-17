@@ -32,9 +32,10 @@ define( ["clocks", "gameOfLife", "utils" ],
             var pWidth = pW- pW%gridn
             var pHeight = pH - pH%gridn
 
-            // pWidth = pWidth>pHeight?pHeight:pWidth; //smaller of the two
+            pWidth = pWidth>pHeight?pHeight:pWidth; //smaller of the two
             //pWidth = pHeight
             pHeight = pWidth
+
 
             var workspace = [];
             var area_string = []

@@ -20,9 +20,17 @@
 
     <body bg-color="#000000">
 
-      <header> Draw boundaries to stop the spread of cells in overcrowded
-        game world. Cells in contact with boundary vanish(become dead). Try to
-        get the game to static configuration. </header>
+      <header>
+        Draw boundaries to stop the spread of cells in overcrowded game
+        world.
+        <br>
+        <i> I developed this game as a humble tribute to Conway's Game of Life.
+       RIP. </i> <br>
+       Press and hold mouse to draw lines.
+          Cells in contact with boundary vanish(become dead).
+          HINT: Target and corner the moving cells from spreading.
+
+      </header>
 
       <div id='main'>
 
@@ -37,7 +45,6 @@
         </article>
 
         <nav>
-
         </nav>
 
         <aside>
@@ -45,13 +52,14 @@
           <input type="button" id="reset" value="Reset">  </input> <br>
           <input type="button" id="clear" value="Clear Screen">  </input> <br>
 
+
           <!-- <input type="button" id="restart" value="New Ca state">  </input> -->
           <!-- <input type="text" id="percentCA" value="0.2" style="width: 20px"> </input> <br> -->
 
           <input type="text" id="life_rule" value="3"
-                 style="width:75px" hidden>
+                 style="width:75px" hidden />
 
-          <b> Preset configurations </b>
+          <!-- <b> Preset configurations </b> -->
 
           <select hidden>
             <option value="None"> ---- </option>
