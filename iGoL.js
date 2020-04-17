@@ -25,14 +25,15 @@ define( ["clocks", "gameOfLife", "utils" ],
             //canvas.clientHeight;
 
             var svgXY = document.getElementById( 'svgCanvas' ).getBoundingClientRect()
-            var svgX = svgXY.left
-            var svgY = svgXY.top
+            var svgX1 = svgXY.left
+            var svgY1 = svgXY.top
             var svgX2 = svgXY.right
             var svgY2 = svgXY.bottom
 
             console.log(svgXY.width)
 
-            //console.log(svgX + ' ' + svgY + ' ' + svgX2 + ' ' + svgY2)
+            console.log(svgX1 + ' ' + svgY1 + ' ' + svgX2 + ' ' + svgY2)
+
 
             // max 5 steps for now.
             var backward_computation = []; //stores the state of CA, and state of perturbing environment.
@@ -141,7 +142,8 @@ define( ["clocks", "gameOfLife", "utils" ],
             });
 
             document.getElementById("clear").addEventListener("click",function(e){
-                gol.clear();
+
+                //gol.clear();
                 for(var i= 0; i< workspace.length;i++){
                     var cf = workspace[i]
                     if( cf ){
@@ -192,6 +194,7 @@ define( ["clocks", "gameOfLife", "utils" ],
 
                 if( moveState == 1 && withinSVG(e.pageX, e.pageY)){
 
+                    console.log("wiohtin svg")
                     //currentFig.pstring += " z";
                     //utils.update_path(e.offsetX, e.offsetY, currentFig) // could be a response call
                     currentFig.pstringArr.push([e.offsetX, e.offsetY]);
@@ -200,12 +203,27 @@ define( ["clocks", "gameOfLife", "utils" ],
                     moveState = 0;
                     //console.log(workspace);
                 }
+                else if( moveState == 1 && !withinSVG(e.pageX, e.pageY) ){
+                    //remove the current
+                    alert("Please draw insidee canvas only");
+
+                    var parent = currentFig.parentNode;
+                    parent.removeChild(currentFig);
+                    currentFig = null;
+                    moveState = 0;
+                }
                 else{
+                    //nothing
+                    currentFig = null;
+                    moveState = 0;
                 }
             });
 
+
             function withinSVG(x,y){
-                if( x > svgX && x < svgX2 && y > svgY && y < svgY2){
+
+                console.log(x + " " + y);
+                if( x > svgX1+25 && x < svgX2-25 && y > svgY1+15 && y < svgY2-15){
                     return 1;
                 }
                 else{

@@ -48,7 +48,8 @@ define([],
                    var path = document.createElementNS(svgns, 'path');
                    path.setAttributeNS(null,"d", pathstring);
                path.setAttributeNS(null, 'stroke', fill);
-               path.setAttributeNS(null, 'stroke-width', 8);
+               path.setAttributeNS(null, 'stroke-width', 4);
+               path.setAttributeNS(null, 'fill-opacity', 0.4);
                    path.setAttributeNS(null, 'fill', "none");
                    canvas.appendChild(path);
                    return path;
